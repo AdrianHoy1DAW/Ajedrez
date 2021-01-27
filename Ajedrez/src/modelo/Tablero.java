@@ -19,7 +19,6 @@ public class Tablero {
 		this.blancasEliminadas = new Lista<Pieza>();
 		this.negrasEliminadas = new Lista<Pieza>();
 		inicializar();
-		
 	}
 	
 	private void inicializar() {
@@ -252,14 +251,12 @@ public class Tablero {
 	
 	public boolean blackCheck() {
 		
-		Lista<Pieza> aux = negras;
 		Lista<Coordenada> coor = new Lista<Coordenada>();
 		
-		while(aux.isEmpty() == false) {
-			coor.juntarListas(aux.getHead().getNextMoves());
+		for(int i =0; i < negras.getSize(); i++) {
+			coor.juntarListas(negras.getSinBorrar(i).getNextMoves());
 			
 		}
-		
 		if(coor.contains(whiteKing.getPosicion()))
 			return true;
 		
@@ -269,13 +266,14 @@ public class Tablero {
 	
 	public boolean whiteCheck() {
 		
-		Lista<Pieza> aux = blancas;
+		
 		Lista<Coordenada> coor = new Lista<Coordenada>();
 		
-		while(aux.isEmpty() == false) {
-			coor.juntarListas(aux.getHead().getNextMoves());
+		for(int i =0; i < blancas.getSize(); i++) {
+			coor.juntarListas(blancas.getSinBorrar(i).getNextMoves());
 			
 		}
+		
 		
 		if(coor.contains(blackKing.getPosicion()))
 			return true;

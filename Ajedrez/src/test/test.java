@@ -21,8 +21,8 @@ public class test {
 		
 //		System.out.println(t.getCelda(c).getPieza().getNextMoves());
 		
-		
 
+		System.out.println(t.blackCheck());
 		System.out.println(t.Print(Color.WHITE));
 		
 		

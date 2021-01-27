@@ -147,9 +147,7 @@ public class Lista<T> {
 				i ++;
 			}
 			valor = aux.getInfo();
-			aux.getSiguiente().setAnterior(aux.getAnterior());
-			aux.getAnterior().setSiguiente(aux.getSiguiente());
-			size --;
+
 		}
 		return valor;
 		
