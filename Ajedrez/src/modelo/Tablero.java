@@ -9,6 +9,8 @@ public class Tablero {
 	private Lista<Pieza> negras;
 	private Lista<Pieza> blancasEliminadas;
 	private Lista<Pieza> negrasEliminadas;
+	private Pieza blackKing;
+	private Pieza whiteKing;
 	
 	public Tablero(){
 		tablero = new Celda[8][8];
@@ -28,31 +30,34 @@ public class Tablero {
 			}
 		}
 		
-//		//Colocar las piezas
+		//Colocar las piezas
 				negras.addHead(new Rook(Color.BLACK,new Coordenada('A',8),this));
 				negras.addHead(new Knight(Color.BLACK,new Coordenada('B',8),this));
 				negras.addHead(new Bishop(Color.BLACK,new Coordenada('C',8),this));
 				negras.addHead(new Queen(Color.BLACK,new Coordenada('D',8),this));
-				negras.addHead(new King(Color.BLACK,new Coordenada('E',8),this));
+				blackKing=new King(Color.BLACK,new Coordenada('E',8),this);
+				negras.addHead(blackKing);
 				negras.addHead(new Bishop(Color.BLACK,new Coordenada('F',8),this));
 				negras.addHead(new Knight(Color.BLACK,new Coordenada('G',8),this));
 				negras.addHead(new Rook(Color.BLACK,new Coordenada('H',8),this));
 				for(int i = 0; i < tablero.length; i ++) {
 					negras.addHead(new Pawn(Color.BLACK,new Coordenada((char) ('A' + i),7),this));
 			}
+			
 				
 				blancas.addHead(new Rook(Color.WHITE,new Coordenada('A',1),this));
 				blancas.addHead(new Knight(Color.WHITE,new Coordenada('B',1),this));
 				blancas.addHead(new Bishop(Color.WHITE,new Coordenada('C',1),this));
-				blancas.addHead(new Queen(Color.WHITE,new Coordenada('D',5),this));
-				blancas.addHead(new King(Color.WHITE,new Coordenada('E',1),this));
+				blancas.addHead(new Queen(Color.WHITE,new Coordenada('D',1),this));
+				whiteKing = new King(Color.WHITE,new Coordenada('E',1),this);
+				blancas.addHead(whiteKing);
 				blancas.addHead(new Bishop(Color.WHITE,new Coordenada('F',1),this));
 				blancas.addHead(new Knight(Color.WHITE,new Coordenada('G',1),this));
 				blancas.addHead(new Rook(Color.WHITE,new Coordenada('H',1),this));
 				for(int i = 0; i < tablero.length; i ++) {
 					blancas.addHead(new Pawn(Color.WHITE,new Coordenada((char) ('A' + i),2),this));
 				}
-		
+			
 	
 				
 		
@@ -101,22 +106,29 @@ public class Tablero {
 	}
 	
 	private String PrintAsBlack() {
-		String visualizar = "";
+		int i = 1;
+		String visualizar = "  A   B   C   D   E   F   G   H" + "\n";
 		for(int fila = 8; fila > -2; fila --) {
 			for(int col = 0; col <tablero[0].length +9; col++) {
 				if(fila == -1) {
-					visualizar += "╚═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╝";
+					visualizar += " ╚═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╝";
 					col = tablero[0].length + 9;
 				} else {
 				if(fila == 8) {
-					visualizar = "╔═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╗";
+					visualizar += " ╔═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╗";
 					col = tablero[0].length + 9;
 				} else {
-					if(col == 0 || col == 16)
+					if(col == 0 || col == 16) {
+						if(col == 0) {
+							visualizar += i;
+						}
 						visualizar += "║";
-					else if (col%2 == 0){
+					} else if (col%2 == 0){
 						visualizar += "│";
 					} else {
+						if(col == 1) {
+							
+						}
 						visualizar += " " + tablero[fila][col/2] + " ";
 					}
 					
@@ -134,8 +146,10 @@ public class Tablero {
 			} else {
 			
 				visualizar += "\n";
-				visualizar += "╟───┼───┼───┼───┼───┼───┼───┼───╢";
+				visualizar += " ╟───┼───┼───┼───┼───┼───┼───┼───╢";
 				visualizar += "\n";
+				i++;
+				
 			}
 			
 				
@@ -158,20 +172,23 @@ public class Tablero {
 	
 
 	private String PrintAsWhite() {
-		String visualizar = "";
+		int i = 8;
+		String visualizar = "   A   B   C   D   E   F   G   H" + "\n";
 		for(int fila = -1; fila < tablero.length +1; fila ++) {
 			for(int col = 0; col <tablero[0].length +9; col++) {
 				if(fila == 8) {
-					visualizar += "╚═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╝";
+					visualizar += " ╚═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╝";
 					col = tablero[0].length + 9;
 				} else {
 				if(fila == -1) {
-					visualizar = "╔═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╗";
+					visualizar += " ╔═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╗";
 					col = tablero[0].length + 9;
 				} else {
-					if(col == 0 || col == 16)
+					if(col == 0 || col == 16) {
+						if(col == 0) 
+							visualizar += i;
 						visualizar += "║";
-					else if (col%2 == 0){
+					} else if (col%2 == 0){
 						visualizar += "│";
 					} else {
 						visualizar += " " + tablero[fila][col/2] + " ";
@@ -191,8 +208,10 @@ public class Tablero {
 			} else {
 			
 				visualizar += "\n";
-				visualizar += "╟───┼───┼───┼───┼───┼───┼───┼───╢";
+				visualizar += " ╟───┼───┼───┼───┼───┼───┼───┼───╢";
 				visualizar += "\n";
+				i --;
+	
 			}
 			
 			
@@ -233,7 +252,16 @@ public class Tablero {
 	
 	public boolean blackCheck() {
 		
+		Lista<Pieza> aux = negras;
+		Lista<Coordenada> coor = new Lista<Coordenada>();
 		
+		while(aux.isEmpty() == false) {
+			coor.juntarListas(aux.getHead().getNextMoves());
+			
+		}
+		
+		if(coor.contains(whiteKing.getPosicion()))
+			return true;
 		
 
 			return false;
@@ -241,6 +269,19 @@ public class Tablero {
 	
 	public boolean whiteCheck() {
 		
-		return false;
+		Lista<Pieza> aux = blancas;
+		Lista<Coordenada> coor = new Lista<Coordenada>();
+		
+		while(aux.isEmpty() == false) {
+			coor.juntarListas(aux.getHead().getNextMoves());
+			
+		}
+		
+		if(coor.contains(blackKing.getPosicion()))
+			return true;
+		
+
+			return false;
+		
 	}
 }
