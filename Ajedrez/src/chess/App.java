@@ -8,25 +8,16 @@ import modelo.Jugador;
 public class App {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
 
 		
-		Jugador blancas, negras;
-		String nombre;
-		ControladorJuego cj;
+		Jugador j1 = new Jugador("Hoyos");
+		Jugador j2 = new Jugador("Martín");
+		ControladorJuego cj = new ControladorJuego(j1, j2);
 		
-		Scanner sc = new Scanner(System.in);
-		nombre = sc.nextLine();
-		
-		System.out.println("Dame el nombre del jugador de las blancas ");
-		blancas = new Jugador(nombre);
-		
-		System.out.println("Dame el nombre del jugador de las negras ");
-		negras = new Jugador(nombre);
-		
-		cj = new ControladorJuego(blancas,negras);
 		
 		cj.go();
+	
 		
 		
 		

@@ -62,6 +62,10 @@ public class Tablero {
 		
 	}
 	
+	public void move(Coordenada origen, Coordenada destino) {
+		this.getCelda(origen).getPieza().move(destino);
+	}
+	
 	public boolean coordenadaEnTablero(Coordenada c) {
 		return !(c.getEjeX() < 'A' || c.getEjeY() < 1 || c.getEjeX() > 'H' || c.getEjeY() > 8);
 	}

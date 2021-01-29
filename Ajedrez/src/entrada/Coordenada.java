@@ -23,6 +23,8 @@ public class Coordenada {
 //		}
 		
 	}
+
+	
 	
 	
 	
@@ -35,8 +37,7 @@ public class Coordenada {
 	public int getEjeY() {
 		return ejeY;
 	}
-
-
+	
 
 	public Coordenada up() {
 		return new Coordenada(this.ejeX , this.ejeY +1);

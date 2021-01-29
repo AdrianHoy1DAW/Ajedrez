@@ -1,6 +1,7 @@
 package test;
 
 import entrada.Coordenada;
+import entrada.Herramientas;
 import modelo.Color;
 import modelo.Pieza;
 import modelo.Tablero;
@@ -21,8 +22,9 @@ public class test {
 		
 //		System.out.println(t.getCelda(c).getPieza().getNextMoves());
 		
-
-		System.out.println(t.blackCheck());
+		
+		System.out.println(t.Print(Color.WHITE));
+		t.getCelda(Herramientas.obtenerCoordenada()).getPieza().move(Herramientas.obtenerCoordenada());
 		System.out.println(t.Print(Color.WHITE));
 		
 		
