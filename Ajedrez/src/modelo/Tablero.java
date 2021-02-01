@@ -160,8 +160,7 @@ public class Tablero {
 		}
 		visualizar += "\n" + "blancas Eliminadas: " + blancasEliminadas + "\n";
 		visualizar += "\n" + "negras Eliminadas: " + negrasEliminadas + "\n";
-		visualizar += "\n" + "negras: " + negras + "\n";
-		visualizar += "\n" + "blancas: " + blancas + "\n";
+
 		
 		return visualizar;
 	
@@ -225,8 +224,7 @@ public class Tablero {
 		
 		visualizar += "\n" + "blancas Eliminadas: " + blancasEliminadas + "\n";
 		visualizar += "\n" + "negras Eliminadas: " + negrasEliminadas + "\n";
-		visualizar += "\n" + "negras: " + negras + "\n";
-		visualizar += "\n" + "blancas: " + blancas + "\n";
+
 		
 		
 		

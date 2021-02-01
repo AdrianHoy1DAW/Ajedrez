@@ -30,6 +30,16 @@ public abstract class Pieza {
 		
 	}
 	
+	public boolean canMove() {
+		
+		if(getNextMoves().isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
+	
 	public void move(Coordenada c) {
 		
 		if(tablero.getCelda(c).contienePieza()) 
