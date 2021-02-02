@@ -38,7 +38,8 @@ public class Pawn extends Pieza{
 				} else {
 					addCoordenada(posicion.up(), lista);
 					if(posicion.getEjeY() == 2) {
-						addCoordenada(posicion.up().up(), lista);
+						if(tablero.getCelda(posicion.up().up()).contienePieza() == false)
+							addCoordenada(posicion.up().up(), lista);
 					} 
 				}
 			}
@@ -61,7 +62,8 @@ public class Pawn extends Pieza{
 				} 
 			
 			if(posicion.getEjeY() == 7) {
-				addCoordenada(posicion.down().down(), lista);
+				if(tablero.getCelda(posicion.down().down()).contienePieza() == false)
+					addCoordenada(posicion.down().down(), lista);
 			} 
 			
 			if(tablero.coordenadaEnTablero(posicion.down())) {

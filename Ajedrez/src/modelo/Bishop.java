@@ -65,7 +65,7 @@ public class Bishop extends Pieza{
 		aux = aux.leftUp();
 	}
 	
-	if(tablero.coordenadaEnTablero(aux.rightUp()))
+	if(tablero.coordenadaEnTablero(aux.leftUp()))
 			if(tablero.getCelda(aux.leftUp()).getPieza().getColor() != p.getColor())
 				lista.addHead(aux.leftUp());
 	

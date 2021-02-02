@@ -70,6 +70,23 @@ public class Tablero {
 		return !(c.getEjeX() < 'A' || c.getEjeY() < 1 || c.getEjeX() > 'H' || c.getEjeY() > 8);
 	}
 	
+	public boolean contieneReyBlanco() {
+		if(this.getBlancasEliminadas().contains(this.getWhiteKing())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean contieneReyNegro() {
+		
+		if(this.getNegrasEliminadas().contains(this.getBlackKing())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 
 	
 	public Celda getCelda(Coordenada coordenada) {
@@ -236,6 +253,24 @@ public class Tablero {
 	
 	
 	
+	
+	
+	public Pieza getBlackKing() {
+		return blackKing;
+	}
+
+	public Pieza getWhiteKing() {
+		return whiteKing;
+	}
+
+	public Lista<Pieza> getBlancasEliminadas() {
+		return blancasEliminadas;
+	}
+
+	public Lista<Pieza> getNegrasEliminadas() {
+		return negrasEliminadas;
+	}
+
 	public Lista<Pieza> getBlancas() {
 		return blancas;
 	}
