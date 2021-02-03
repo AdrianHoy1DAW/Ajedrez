@@ -175,8 +175,8 @@ public class Tablero {
 				
 			
 		}
-		visualizar += "\n" + "blancas Eliminadas: " + blancasEliminadas + "\n";
-		visualizar += "\n" + "negras Eliminadas: " + negrasEliminadas + "\n";
+		
+		visualizar += pintarBajo();
 
 		
 		return visualizar;
@@ -239,8 +239,7 @@ public class Tablero {
 			
 		}
 		
-		visualizar += "\n" + "blancas Eliminadas: " + blancasEliminadas + "\n";
-		visualizar += "\n" + "negras Eliminadas: " + negrasEliminadas + "\n";
+		visualizar += pintarBajo();
 
 		
 		
@@ -248,6 +247,54 @@ public class Tablero {
 		return visualizar;
 	
 	
+		
+	}
+	
+	public String pintarBajo() {
+		String pintar = "";
+		int numero = 7;
+
+
+		
+		pintar = "\n╔═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╗ \n";
+		for(int i = 0; i <= 24; i++) {
+			if(i == 0) {
+				pintar += "║";
+			} else if(i == 24) {
+				pintar += "║\n";
+			} else if(i % 2 == 0){
+				pintar += "│";
+			} else if(i <= 12) {
+				pintar += " " + new Pawn(Color.WHITE) + " ";
+				
+			} else {
+				pintar += " " + new Pawn(Color.BLACK) + " ";
+			}	
+		}
+		
+		pintar += "╟───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───╢\n";
+		numero = 7;
+		
+		
+		for(int i = 0; i <= 24; i++) {
+			if(i == 0) {
+				pintar += "║";
+			} else if(i == 24) {
+				pintar += "║\n";
+			} else if(i % 2 == 0){
+				pintar += "│";
+			} else if(i <= 12) {
+				pintar += " " + blancas.contar(new Pawn(Color.WHITE)) + " ";
+				
+			} else {
+				pintar += " " + negras.contar(new Pawn(Color.BLACK)) + " ";
+			}	
+		}
+		
+		pintar += "╚═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╝";
+		
+		return pintar;
+		
 		
 	}
 	

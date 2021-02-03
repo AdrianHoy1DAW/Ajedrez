@@ -3,6 +3,7 @@ package test;
 import entrada.Coordenada;
 import entrada.Herramientas;
 import modelo.Color;
+import modelo.Pawn;
 import modelo.Pieza;
 import modelo.Tablero;
 import modelo.Tipo;
@@ -17,18 +18,16 @@ public class test {
 		Coordenada destino2 = new Coordenada('A', 1);
 		Coordenada destino3 = new Coordenada('D', 2);
 		Tablero t = new Tablero();
+		Pieza p = new Pawn(Color.WHITE,new Coordenada('A',2),t);
 		
 		
 		
 //		System.out.println(t.getCelda(c).getPieza().getNextMoves());
 		
-		
-		System.out.println(t.Print(Color.WHITE));
-		t.getCelda(Herramientas.obtenerCoordenada()).getPieza().move(Herramientas.obtenerCoordenada());
-		System.out.println(t.Print(Color.WHITE));
-		
-		
-		
+		int numero = 7;
+
+		System.out.println(t.getBlancas().contar(p));
+			
 		
 		
 		

@@ -231,6 +231,20 @@ public class Lista<T> {
 		return this;
 		
 	}
+	
+	public int contar(T element) {
+		int contar = 0;
+		Nodo<T> auxiliar = cabeza;
+		while(auxiliar != null) {
+			if(auxiliar.getInfo().equals(element)) {
+				contar ++;
+			}
+			auxiliar = auxiliar.getSiguiente();
+		}
+		
+		
+		return contar;
+	}
 
 	@Override
 	public String toString() {

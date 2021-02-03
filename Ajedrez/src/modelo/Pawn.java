@@ -14,6 +14,17 @@ public class Pawn extends Pieza{
 			tipo = Tipo.BLACK_PAWN;
 		}
 	}
+	
+	public Pawn(Color color) {
+		super();
+		// TODO Auto-generated constructor stub
+	
+		if(color == Color.WHITE) {
+			tipo = Tipo.WHITE_PAWN;
+		} else {
+			tipo = Tipo.BLACK_PAWN;
+		}
+	}
 
 	@Override
 	public Lista<Coordenada> getNextMoves() {
@@ -81,6 +92,8 @@ public class Pawn extends Pieza{
 		
 		return lista;
 	}
+	
+
 	
 	@Override
 	public void move(Coordenada c) {

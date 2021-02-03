@@ -45,9 +45,9 @@ public class Herramientas {
 		coordenada = coordenada.toUpperCase();
 		if(coordenada.length() != 2)
 			return false;
-		if(!(coordenada.charAt(0) >= 'A' && coordenada.charAt(0) <= 'J'))
+		if(!(coordenada.charAt(0) >= 'A' && coordenada.charAt(0) <= 'H'))
 			return false;
-		if(!(coordenada.charAt(1)>='0' && coordenada.charAt(1) <= '9' ))
+		if(!(coordenada.charAt(1)>='1' && coordenada.charAt(1) <= '8' ))
 			return false;
 		return true;
 	}

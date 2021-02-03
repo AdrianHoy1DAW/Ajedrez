@@ -16,6 +16,10 @@ public abstract class Pieza {
 		colocate(posicion);
 	}
 	
+	public Pieza() {
+		
+	}
+	
 	private void colocate(Coordenada c) {
 		
 		tablero.getCelda(posicion).setPieza(null);
@@ -57,6 +61,7 @@ public abstract class Pieza {
 	}
 	
 	
+	
 	public Color getColor() {
 		return tipo.getColor();
 	}
@@ -68,6 +73,19 @@ public abstract class Pieza {
 		return posicion;
 	}
 	
+	
+	@Override
+	public boolean equals(Object o) {
+		if(o instanceof Pieza) {
+			Pieza p = (Pieza) o;
+			if(tipo == p.tipo) {
+				return true;
+			}
+		} else {
+			return false;
+		}
+		return false;
+	}
 	
 
 	@Override
