@@ -14,6 +14,14 @@ public class Knight extends Pieza {
 			tipo = Tipo.BLACK_KNIGHT;
 		}
 	}
+	
+	public Knight(Color color) {
+		if(color == Color.WHITE) {
+			tipo = Tipo.WHITE_KNIGHT;
+		} else {
+			tipo = Tipo.BLACK_KNIGHT;
+		}
+	}
 
 	@Override
 	public Lista<Coordenada> getNextMoves() {

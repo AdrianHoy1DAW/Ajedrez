@@ -14,6 +14,14 @@ public class Queen extends Pieza {
 		}
 	
 	}
+	
+	public Queen(Color color) {
+		if(color == Color.WHITE) {
+			tipo = Tipo.WHITE_QUEEN;
+		} else {
+			tipo = Tipo.BLACK_QUEEN;
+		}
+	}
 
 	@Override
 	public Lista<Coordenada> getNextMoves() {

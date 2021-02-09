@@ -24,9 +24,7 @@ public class test {
 		
 //		System.out.println(t.getCelda(c).getPieza().getNextMoves());
 		
-		int numero = 7;
-
-		System.out.println(t.getBlancas().contar(p));
+		System.out.println(t.Print(Color.WHITE));
 			
 		
 		

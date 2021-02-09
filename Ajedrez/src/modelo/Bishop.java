@@ -14,6 +14,14 @@ public class Bishop extends Pieza{
 			tipo = Tipo.BLACK_BISHOP;
 		}
 	}
+	
+	public Bishop(Color color) {
+		if(color == Color.WHITE) {
+			tipo = Tipo.WHITE_BISHOP;
+		} else {
+			tipo = Tipo.BLACK_BISHOP;
+		}
+	}
 
 	@Override
 	public Lista<Coordenada> getNextMoves() {

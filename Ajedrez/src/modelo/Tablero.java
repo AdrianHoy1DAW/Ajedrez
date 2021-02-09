@@ -176,7 +176,15 @@ public class Tablero {
 			
 		}
 		
-		visualizar += pintarBajo();
+		
+		if(this.whiteCheck() == true ) {
+			visualizar += pintarBajoRojoNegro();
+		} else if(this.blackCheck() == true) {
+			visualizar += pintarBajoRojoBlanco();
+		} else {
+			visualizar += pintarBajo();
+		}
+		
 
 		
 		return visualizar;
@@ -239,7 +247,14 @@ public class Tablero {
 			
 		}
 		
-		visualizar += pintarBajo();
+		if(this.whiteCheck() == true ) {
+			visualizar += pintarBajoRojoNegro();
+		} else if(this.blackCheck() == true) {
+			visualizar += pintarBajoRojoBlanco();
+		} else {
+			visualizar += pintarBajo();
+		}
+		
 
 		
 		
@@ -252,7 +267,7 @@ public class Tablero {
 	
 	public String pintarBajo() {
 		String pintar = "";
-		int numero = 7;
+		
 
 
 		
@@ -264,16 +279,35 @@ public class Tablero {
 				pintar += "║\n";
 			} else if(i % 2 == 0){
 				pintar += "│";
-			} else if(i <= 12) {
-				pintar += " " + new Pawn(Color.WHITE) + " ";
-				
-			} else {
+			} else if(i == 1) {
+				pintar += " " + new Pawn(Color.WHITE) + " ";	
+			} else if(i == 3){
+				pintar += " " + new Rook(Color.WHITE) + " ";
+			} else if(i == 5) {
+				pintar += " " + new Bishop(Color.WHITE) + " ";
+			} else if(i == 7) {
+				pintar += " " + new Knight(Color.WHITE) + " ";
+			} else if(i == 9) {
+				pintar += " " + new Queen(Color.WHITE) + " ";
+			} else if(i == 11) {
+				pintar += " " + new King(Color.WHITE) + " ";
+			} else if(i == 13) {
 				pintar += " " + new Pawn(Color.BLACK) + " ";
-			}	
+			} else if(i == 15) {
+				pintar += " " + new Rook(Color.BLACK) + " ";
+			} else if(i == 17) {
+				pintar += " " + new Bishop(Color.BLACK) + " ";
+			} else if(i == 19) {
+				pintar += " " + new Knight(Color.BLACK) + " ";
+			} else if(i == 21) {
+				pintar += " " + new Queen(Color.BLACK) + " ";
+			} else if(i == 23) {
+				pintar += " " + new King(Color.BLACK) + " ";
+			}
 		}
 		
 		pintar += "╟───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───╢\n";
-		numero = 7;
+		
 		
 		
 		for(int i = 0; i <= 24; i++) {
@@ -283,11 +317,202 @@ public class Tablero {
 				pintar += "║\n";
 			} else if(i % 2 == 0){
 				pintar += "│";
-			} else if(i <= 12) {
-				pintar += " " + blancas.contar(new Pawn(Color.WHITE)) + " ";
-				
-			} else {
-				pintar += " " + negras.contar(new Pawn(Color.BLACK)) + " ";
+			}else if(i == 1) {
+				pintar += " " + blancas.contar(new Pawn(Color.WHITE)) + " ";	
+			} else if(i == 3){
+				pintar += " " + blancas.contar(new Rook(Color.WHITE)) + " ";
+			} else if(i == 5) {
+				pintar += " " + blancas.contar(new Bishop(Color.WHITE)) + " ";
+			} else if(i == 7) {
+				pintar += " " + blancas.contar(new Knight(Color.WHITE)) + " ";
+			} else if(i == 9) {
+				pintar += " " + blancas.contar(new Queen(Color.WHITE)) + " ";
+			} else if(i == 11) {
+				pintar += " " + blancas.contar(new King(Color.WHITE)) + " ";
+			} else if(i == 13) {
+				pintar += " " +	negras.contar(new Pawn(Color.BLACK)) + " ";
+			} else if(i == 15) {
+				pintar += " " + negras.contar(new Rook(Color.BLACK)) + " ";
+			} else if(i == 17) {
+				pintar += " " + negras.contar(new Bishop(Color.BLACK)) + " ";
+			} else if(i == 19) {
+				pintar += " " + negras.contar(new Knight(Color.BLACK)) + " ";
+			} else if(i == 21) {
+				pintar += " " + negras.contar(new Queen(Color.BLACK)) + " ";
+			} else if(i == 23) {
+				pintar += " " + negras.contar(new King(Color.BLACK)) + " ";
+			}	
+		}
+		
+		pintar += "╚═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╝";
+		
+		return pintar;
+		
+		
+	}
+	
+	public String pintarBajoRojoBlanco() {
+		String pintar = "";
+		
+
+
+		
+		pintar = "\n╔═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╗ \n";
+		for(int i = 0; i <= 24; i++) {
+			if(i == 0) {
+				pintar += "║";
+			} else if(i == 24) {
+				pintar += "║\n";
+			} else if(i % 2 == 0){
+				pintar += "│";
+			} else if(i == 1) {
+				pintar += " " + new Pawn(Color.WHITE) + " ";	
+			} else if(i == 3){
+				pintar += " " + new Rook(Color.WHITE) + " ";
+			} else if(i == 5) {
+				pintar += " " + new Bishop(Color.WHITE) + " ";
+			} else if(i == 7) {
+				pintar += " " + new Knight(Color.WHITE) + " ";
+			} else if(i == 9) {
+				pintar += " " + new Queen(Color.WHITE) + " ";
+			} else if(i == 11) {
+				pintar += " " + "\u001B[31m" + new King(Color.WHITE) + " " + "\u001B[0m";
+			} else if(i == 13) {
+				pintar += " " + new Pawn(Color.BLACK) + " ";
+			} else if(i == 15) {
+				pintar += " " + new Rook(Color.BLACK) + " ";
+			} else if(i == 17) {
+				pintar += " " + new Bishop(Color.BLACK) + " ";
+			} else if(i == 19) {
+				pintar += " " + new Knight(Color.BLACK) + " ";
+			} else if(i == 21) {
+				pintar += " " + new Queen(Color.BLACK) + " ";
+			} else if(i == 23) {
+				pintar += " " + new King(Color.BLACK) + " ";
+			}
+		}
+		
+		pintar += "╟───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───╢\n";
+		
+		
+		
+		for(int i = 0; i <= 24; i++) {
+			if(i == 0) {
+				pintar += "║";
+			} else if(i == 24) {
+				pintar += "║\n";
+			} else if(i % 2 == 0){
+				pintar += "│";
+			}else if(i == 1) {
+				pintar += " " + blancas.contar(new Pawn(Color.WHITE)) + " ";	
+			} else if(i == 3){
+				pintar += " " + blancas.contar(new Rook(Color.WHITE)) + " ";
+			} else if(i == 5) {
+				pintar += " " + blancas.contar(new Bishop(Color.WHITE)) + " ";
+			} else if(i == 7) {
+				pintar += " " + blancas.contar(new Knight(Color.WHITE)) + " ";
+			} else if(i == 9) {
+				pintar += " " + blancas.contar(new Queen(Color.WHITE)) + " ";
+			} else if(i == 11) {
+				pintar += " " + blancas.contar(new King(Color.WHITE)) + " ";
+			} else if(i == 13) {
+				pintar += " " +	negras.contar(new Pawn(Color.BLACK)) + " ";
+			} else if(i == 15) {
+				pintar += " " + negras.contar(new Rook(Color.BLACK)) + " ";
+			} else if(i == 17) {
+				pintar += " " + negras.contar(new Bishop(Color.BLACK)) + " ";
+			} else if(i == 19) {
+				pintar += " " + negras.contar(new Knight(Color.BLACK)) + " ";
+			} else if(i == 21) {
+				pintar += " " + negras.contar(new Queen(Color.BLACK)) + " ";
+			} else if(i == 23) {
+				pintar += " " + negras.contar(new King(Color.BLACK)) + " ";
+			}	
+		}
+		
+		pintar += "╚═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╝";
+		
+		return pintar;
+		
+		
+	}
+	
+	public String pintarBajoRojoNegro() {
+		String pintar = "";
+		
+
+
+		
+		pintar = "\n╔═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╗ \n";
+		for(int i = 0; i <= 24; i++) {
+			if(i == 0) {
+				pintar += "║";
+			} else if(i == 24) {
+				pintar += "║\n";
+			} else if(i % 2 == 0){
+				pintar += "│";
+			} else if(i == 1) {
+				pintar += " " + new Pawn(Color.WHITE) + " ";	
+			} else if(i == 3){
+				pintar += " " + new Rook(Color.WHITE) + " ";
+			} else if(i == 5) {
+				pintar += " " + new Bishop(Color.WHITE) + " ";
+			} else if(i == 7) {
+				pintar += " " + new Knight(Color.WHITE) + " ";
+			} else if(i == 9) {
+				pintar += " " + new Queen(Color.WHITE) + " ";
+			} else if(i == 11) {
+				pintar += " "  + new King(Color.WHITE) + " " ;
+			} else if(i == 13) {
+				pintar += " " + new Pawn(Color.BLACK) + " ";
+			} else if(i == 15) {
+				pintar += " " + new Rook(Color.BLACK) + " ";
+			} else if(i == 17) {
+				pintar += " " + new Bishop(Color.BLACK) + " ";
+			} else if(i == 19) {
+				pintar += " " + new Knight(Color.BLACK) + " ";
+			} else if(i == 21) {
+				pintar += " " + new Queen(Color.BLACK) + " ";
+			} else if(i == 23) {
+				pintar += " " + "\u001B[31m" + new King(Color.BLACK) + " " + "\u001B[0m";
+			}
+		}
+		
+		pintar += "╟───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───╢\n";
+		
+		
+		
+		for(int i = 0; i <= 24; i++) {
+			if(i == 0) {
+				pintar += "║";
+			} else if(i == 24) {
+				pintar += "║\n";
+			} else if(i % 2 == 0){
+				pintar += "│";
+			}else if(i == 1) {
+				pintar += " " + blancas.contar(new Pawn(Color.WHITE)) + " ";	
+			} else if(i == 3){
+				pintar += " " + blancas.contar(new Rook(Color.WHITE)) + " ";
+			} else if(i == 5) {
+				pintar += " " + blancas.contar(new Bishop(Color.WHITE)) + " ";
+			} else if(i == 7) {
+				pintar += " " + blancas.contar(new Knight(Color.WHITE)) + " ";
+			} else if(i == 9) {
+				pintar += " " + blancas.contar(new Queen(Color.WHITE)) + " ";
+			} else if(i == 11) {
+				pintar += " " + blancas.contar(new King(Color.WHITE)) + " ";
+			} else if(i == 13) {
+				pintar += " " +	negras.contar(new Pawn(Color.BLACK)) + " ";
+			} else if(i == 15) {
+				pintar += " " + negras.contar(new Rook(Color.BLACK)) + " ";
+			} else if(i == 17) {
+				pintar += " " + negras.contar(new Bishop(Color.BLACK)) + " ";
+			} else if(i == 19) {
+				pintar += " " + negras.contar(new Knight(Color.BLACK)) + " ";
+			} else if(i == 21) {
+				pintar += " " + negras.contar(new Queen(Color.BLACK)) + " ";
+			} else if(i == 23) {
+				pintar += " " + negras.contar(new King(Color.BLACK)) + " ";
 			}	
 		}
 		

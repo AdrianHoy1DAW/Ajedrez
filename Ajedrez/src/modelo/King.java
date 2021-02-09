@@ -15,6 +15,14 @@ public class King extends Pieza{
 			tipo = Tipo.BLACK_KING;
 		}
 	}
+	
+	public King(Color color) {
+		if(color == Color.WHITE) {
+			tipo = Tipo.WHITE_KING;
+		} else {
+			tipo = Tipo.BLACK_KING;
+		}
+	}
 
 	@Override
 	public Lista<Coordenada> getNextMoves() {
