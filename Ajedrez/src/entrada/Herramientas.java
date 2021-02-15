@@ -25,15 +25,13 @@ public class Herramientas {
 	}
 	
 	private static String obtenerCadena() {
-		Mensaje("Introduce una coordenada primero poniendo la letra y después el número ");
-		String coordenada = pedirString();
+		String coordenada = pedirString("Introduce una coordenada primero poniendo la letra y después el número ");
 		
 		if(coordenada.length() == 2) {
 			return coordenada;
 		} else {
 			while(coordenada.length() != 2) {
-				System.out.println("Introduce la coordenada correctamente");
-				coordenada = pedirString();
+				coordenada = pedirString("Introduce la coordenada correctamente");
 		
 			}	
 		}	
@@ -54,13 +52,30 @@ public class Herramientas {
 	
 	
 	
-	public static String pedirString() {
+	public static String pedirString(String msg) {
 		String pedido = "";
 		Scanner sc = new Scanner(System.in);
-		
+		Mensaje(msg);
 		pedido = sc.nextLine();
 		return pedido;
 		
+		
+	}
+	
+	public static int pedirInt(String msg) {
+		int pedido = 0;
+		boolean error = false;
+		while(error) {
+			try {
+				pedido = Integer.parseInt(pedirString(msg));
+				error = true;
+			} catch (Exception e) {
+				Mensaje("Debes introducir un número");
+			}
+		}
+		
+		return pedido;
+
 		
 	}
 	

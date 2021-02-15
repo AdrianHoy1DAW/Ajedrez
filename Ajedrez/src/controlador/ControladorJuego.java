@@ -3,18 +3,19 @@ package controlador;
 import entrada.Coordenada;
 import entrada.Herramientas;
 import modelo.Color;
-import modelo.Jugador;
+
+import modelo.Player;
 import modelo.Tablero;
 
 public class ControladorJuego {
 
-	private Jugador playerWhite;
-	private Jugador playerBlack;
+	private Player playerWhite;
+	private Player playerBlack;
 	private Tablero tablero;
 	private Color turno;
 	
 	
-	public ControladorJuego(Jugador playerWhite, Jugador playerBlack) {
+	public ControladorJuego(Player playerWhite, Player playerBlack) {
 		super();
 		this.playerWhite = playerWhite;
 		this.playerBlack = playerBlack;

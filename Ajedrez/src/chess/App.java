@@ -3,7 +3,8 @@ package chess;
 import java.util.Scanner;
 
 import controlador.ControladorJuego;
-import modelo.Jugador;
+
+import modelo.Player;
 
 public class App {
 
@@ -11,8 +12,8 @@ public class App {
 		Scanner sc = new Scanner(System.in);
 
 		
-		Jugador j1 = new Jugador("Hoyos");
-		Jugador j2 = new Jugador("Martín");
+		Player j1 = new Player("Hoyos");
+		Player j2 = new Player("Martín");
 		ControladorJuego cj = new ControladorJuego(j1, j2);
 		
 		
