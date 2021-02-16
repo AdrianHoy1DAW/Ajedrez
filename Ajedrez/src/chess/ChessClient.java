@@ -1,10 +1,14 @@
 package chess;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import entrada.Herramientas;
+import modelo.Color;
 import modelo.Player;
 import sockets.Message;
 
@@ -92,9 +96,9 @@ public class ChessClient {
 
 	private void getPlayer() {
 
-		String nombre = Input.getString("Dame tu nombre");
+		String nombre = Herramientas.pedirString("Dame tu nombre");
 
-		String c = Input.getString("Dime tu color [w|b]:").toLowerCase().substring(0, 1);
+		String c = Herramientas.pedirString("Dime tu color [w|b]:").toLowerCase().substring(0, 1);
 		try {
 			if (c.equals("b"))
 				player = new Player(nombre, Color.BLACK,

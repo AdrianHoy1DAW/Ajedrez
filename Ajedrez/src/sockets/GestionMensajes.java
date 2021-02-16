@@ -14,6 +14,7 @@ public class GestionMensajes {
 		
 		case CREATE_GAME:
 			
+			out = Message;
 			break;
 		}
 

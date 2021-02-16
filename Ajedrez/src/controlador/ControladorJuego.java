@@ -9,18 +9,26 @@ import modelo.Tablero;
 
 public class ControladorJuego {
 
-	private Player playerWhite;
-	private Player playerBlack;
+	private Player player1;
+	private Player player2;
 	private Tablero tablero;
 	private Color turno;
 	
 	
 	public ControladorJuego(Player playerWhite, Player playerBlack) {
 		super();
-		this.playerWhite = playerWhite;
-		this.playerBlack = playerBlack;
+		this.player1 = playerWhite;
+		this.player2 = playerBlack;
 		tablero = new Tablero();
 		turno = Color.WHITE;
+	}
+	
+	public ControladorJuego(Player player1) {
+		
+		this.player1 = player1;
+		this.tablero = new Tablero();
+		turno = Color.WHITE;
+		
 	}
 	
 	public void go() {
