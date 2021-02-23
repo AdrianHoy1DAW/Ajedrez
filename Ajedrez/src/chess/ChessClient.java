@@ -6,8 +6,11 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.TreeMap;
 
+import entrada.Coordenada;
 import entrada.Herramientas;
+
 import modelo.Color;
 import modelo.Player;
 import sockets.Message;
@@ -29,24 +32,26 @@ public class ChessClient {
 	}
 
 	private void run() {
-		showStartMenu();
 
-		
 		int option;
 
 		do {
-
+			showStartMenu();
 			option = Herramientas.pedirInt("Enter option (0-Exit):");
 			switch (option) {
 			case 1:
 				connect();
-				getPlayer();
-				createGame();
+				if (socket != null) {
+					getPlayer();
+					createGame();
+				}
 				break;
 			case 2:
 				connect();
-				getPlayer();
-				addToGame();
+				if (socket != null) {
+					getPlayer();
+					addToGame();
+				}
 				break;
 			default:
 				showStartMenu();
@@ -58,18 +63,83 @@ public class ChessClient {
 	}
 
 	private void addToGame() {
+		
+		Message mOut, mIn;
 
+		int game;
+
+		mOut = new Message(Message.Type.GET_CREATED_GAMES,
+				"Requesting the list of games waiting for the player " + player.getName());
+		mOut.setPlayer(player);
+
+		mIn = sendMessageAndWaitResponse(mOut);
+		TreeMap<Integer, String[]> listadoTotal = mIn.getListOfGames();
+		TreeMap<Integer, String[]> listadoPosible = new TreeMap<Integer, String[]>();
+
+		for (Integer key : listadoTotal.keySet()) {
+			if (player.getColor() == Color.WHITE && listadoTotal.get(key)[0] == null
+					|| player.getColor() == Color.BLACK && listadoTotal.get(key)[1] == null)
+				listadoPosible.put(key, listadoTotal.get(key));
+		}
+		
+		if (listadoPosible.isEmpty()) {
+			System.out.println("No hay partidas en espera para ese color.");
+		} else {
+
+			do {
+				imprimirPartidas(listadoPosible);
+				game = Herramientas.pedirInt("Select the id of the desired game");
+				if (!mIn.getListOfGames().keySet().contains(game))
+					System.out.println("The game does not exist.");
+
+			} while (!mIn.getListOfGames().keySet().contains(game) && game != 0);
+
+			mOut = new Message(Message.Type.ADD_TO_GAME,
+					"Requesting to add the player " + player.getName() + " to the game " + game);
+			mOut.setGameId(game);
+			mOut.setPlayer(player);
+
+			mIn = sendMessageAndWaitResponse(mOut);
+			if (mIn.getMessageType() == Message.Type.ADDED_TO_GAME)
+				play();
+		}
 	}
 
 	private void createGame() {
 
 		Message mIn, mOut;
-		mOut = new Message(Message.Type.CREATE_GAME,"Crear un nuevo juego.");
+		mOut = new Message(Message.Type.CREATE_GAME, "Crear un nuevo juego.");
 		mOut.setPlayer(player);
-		
+
 		mIn = sendMessageAndWaitResponse(mOut);
-		
-		
+
+		if (mIn.getMessageType() == Message.Type.GAME_CREATED_WAITING) {
+			System.out.println(mIn.getDescription());
+			play();
+		} else {
+			showStartMenu();
+			System.out.println("The game could not be created.");
+		}
+
+	}
+
+	private void play() {
+
+		try {
+
+			Message mOut = null, mIn = null;
+			boolean exit = false;
+			Coordenada c;
+
+			// To do
+			// While you don't have to exit and the message read is not null
+			// If the message is to show information, you only have to show it,
+			// but if the message request a coordinate, your have to provide it.
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -85,11 +155,10 @@ public class ChessClient {
 			this.ois = new ObjectInputStream(socket.getInputStream());
 			this.oos = new ObjectOutputStream(socket.getOutputStream());
 
-			System.out.println("Conexion establecida correctamente!!");	
-			
+			System.out.println("Conexion establecida correctamente!!");
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("No se ha podido realizar la conexion.");
 		}
 
 	}
@@ -101,19 +170,17 @@ public class ChessClient {
 		String c = Herramientas.pedirString("Dime tu color [w|b]:").toLowerCase().substring(0, 1);
 		try {
 			if (c.equals("b"))
-				player = new Player(nombre, Color.BLACK,
-						InetAddress.getByName(socket.getRemoteSocketAddress().toString()));
+				player = new Player(nombre, Color.BLACK, socket.getLocalAddress());
 			else
-				player = new Player(nombre, Color.WHITE,
-						InetAddress.getByName(socket.getRemoteSocketAddress().toString()));
+				player = new Player(nombre, Color.WHITE, socket.getLocalAddress());
 
-		} catch (UnknownHostException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
-	
+
 	private Message sendMessageAndWaitResponse(Message mOut) {
 
 		Message mIn = null;
@@ -141,6 +208,21 @@ public class ChessClient {
 		System.out.println(" ╟────────────────────────────╢");
 		System.out.println(" ║      0- Exit               ║");
 		System.out.println(" ╚════════════════════════════╝");
+
+	}
+
+	private void imprimirPartidas(TreeMap<Integer, String[]> listado) {
+
+		update();
+		
+		for(int i = 0; i < listado.size(); i ++) {
+			
+			System.out.println((i + 1) + " " + listado.get(i));
+			
+		}
+		// To do
+		// Show the list of games
+		
 
 	}
 

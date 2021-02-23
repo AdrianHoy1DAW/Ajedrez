@@ -35,24 +35,39 @@ public class GameManager implements Runnable {
 			oos = new ObjectOutputStream(socket.getOutputStream());
 			ois = new ObjectInputStream(socket.getInputStream());
 
-			Message mIn, mOut;
+			Message mIn=null, mOut=null;
 			boolean exit = false;
-			GestionMensajes gm = new GestionMensajes();
+			GestionMensajes gm = new GestionMensajes(socket,oos,ois,chessServer);
 
 			while (!exit && (mIn = (Message) ois.readObject()) != null) {
 
-				System.out.println("<- GameManager receives: " + mIn.toString());
+				System.out.println("<- GameManager receives the message: " + mIn);
 
 				mOut = gm.procesInput(mIn);
 
-				System.out.println("-> GameManager receives: " + mOut.toString());
-				
+				System.out.println("-> GameManager send the message: " + mOut.getDescription());
+
 				oos.writeObject(mOut);
 
-				if (mOut.getMessageType() == Message.Type.EXIT || mOut.getMessageType() == Message.Type.ADDED_TO_GAME)
-					exit = true;
+				// Cases in which we decided to close GameManager
+				switch (mOut.getMessageType()) {
 
+				case GAME_CREATED_WAITING:
+				case ADDED_TO_GAME:
+				case NOT_ADDED:
+					exit = true;
+				default:
+					break;
+				}
 			}
+
+			// If both players are already in the game, we start
+			if (mOut.getMessageType() == Message.Type.ADDED_TO_GAME) {
+				chessServer.startGame(mOut.getGameId());
+			}
+
+			System.out.println("GameManager finalize for the IP " + socket.getRemoteSocketAddress().toString());
+			
 
 		} catch (Exception e) {
 
@@ -61,3 +76,4 @@ public class GameManager implements Runnable {
 	}
 
 }
+

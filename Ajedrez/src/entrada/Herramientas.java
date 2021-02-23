@@ -65,7 +65,7 @@ public class Herramientas {
 	public static int pedirInt(String msg) {
 		int pedido = 0;
 		boolean error = false;
-		while(error) {
+		while(error == false) {
 			try {
 				pedido = Integer.parseInt(pedirString(msg));
 				error = true;
