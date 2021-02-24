@@ -46,6 +46,8 @@ public class GameManager implements Runnable {
 				mOut = gm.procesInput(mIn);
 
 				System.out.println("-> GameManager send the message: " + mOut.getDescription());
+				
+				
 
 				oos.writeObject(mOut);
 

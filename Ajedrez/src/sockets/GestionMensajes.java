@@ -3,6 +3,7 @@ package sockets;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.TreeMap;
 
 import chess.ChessServer;
@@ -129,23 +130,25 @@ public class GestionMensajes {
 	private TreeMap<Integer, String[]> listGames() {
 		
 		String[] gameInfo = new String[2];
-		Game game = new Game(chessServer);
-		TreeMap<Integer, Game> waitingGames = new TreeMap<>(chessServer.getWaitingGames());
+		
+		HashMap<Integer, Game> waitingGames = new HashMap<>(chessServer.getWaitingGames());
+		 
+	
 		TreeMap<Integer, String[]> summary = new TreeMap<Integer, String[]>();
 		
-		for(int i = 0; i < chessServer.getWaitingGames().size(); i++) {
-			
-			gameInfo[0] = waitingGames.get(i).getName();
-			gameInfo[1] = waitingGames.get(i).getName();
-			summary.put(game.getIdGame(), gameInfo);
+		for(Integer id : waitingGames.keySet()) {
+			gameInfo = new String[2];
+			gameInfo[0] = (waitingGames.get(id).getWhite() != null)? waitingGames.get(id).getWhite().getName(): null;
+			gameInfo[1] = (waitingGames.get(id).getBlack() != null)? waitingGames.get(id).getBlack().getName(): null;
+			summary.put(id, gameInfo);
 			
 			
 		}
+	
 		// To do
 		// Get games from server and make the summary
 		// [0] The name for white
-		// [1] The name for black
-				
+		// [1] The name for black		
 		return summary;
 	} 
 }

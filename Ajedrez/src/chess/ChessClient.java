@@ -131,6 +131,9 @@ public class ChessClient {
 			boolean exit = false;
 			Coordenada c;
 
+			while(exit == false) {
+				
+			}
 			// To do
 			// While you don't have to exit and the message read is not null
 			// If the message is to show information, you only have to show it,
@@ -215,9 +218,9 @@ public class ChessClient {
 
 		update();
 		
-		for(int i = 0; i < listado.size(); i ++) {
+		for(Integer id : listado.keySet()) {
 			
-			System.out.println((i + 1) + " " + listado.get(i));
+			System.out.println((id) + " " + listado.get(id)[0]);
 			
 		}
 		// To do
