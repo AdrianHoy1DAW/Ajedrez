@@ -117,6 +117,8 @@ public class Game extends Thread implements Serializable {
 		boolean moved = false;
 
 		do {
+			sendInformation(player,board.Print(player.getColor()));
+			c = requestCoordinate(player);
 			
 			// To do 
 			// Game mechanics
@@ -127,12 +129,20 @@ public class Game extends Thread implements Serializable {
 
 	public Coordenada requestCoordinate(Player player) {
 		Coordenada c = null;
+		Message mOut = new Message(Message.Type.COORDINATE_REQUEST,"Por favor Inroduce una coordenada");
+		Message mIn = null;
 
 		try {
 			
 			// To do
 			// Send to the player the request coordinate message and wait for the response.
 			// Check if the answer is a correct message, and return the coordinate recived
+			player.getOos().writeObject(mOut);
+			mIn = (Message)player.getOis().readObject();
+			
+			System.out.println(mIn.getDescription());
+			
+		
 
 			
 
@@ -154,8 +164,14 @@ public class Game extends Thread implements Serializable {
 	public void sendInformation(Player player, String information) {
 		
 		
-		// To do
-		// Send to the player the information
+		Message mOut = new Message(Message.Type.GAME_INFORMATION,information);
+		
+		try {
+			player.getOos().writeObject(mOut);
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
 
 	}
 }

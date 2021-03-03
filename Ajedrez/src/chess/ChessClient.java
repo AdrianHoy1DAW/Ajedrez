@@ -105,6 +105,7 @@ public class ChessClient {
 		}
 	}
 
+
 	private void createGame() {
 
 		Message mIn, mOut;
@@ -126,12 +127,23 @@ public class ChessClient {
 	private void play() {
 
 		try {
-
+		
 			Message mOut = null, mIn = null;
 			boolean exit = false;
 			Coordenada c;
-
+			
+			player.setOis(ois);
+			player.setOos(oos);
 			while(exit == false) {
+				mIn = (Message)player.getOis().readObject();
+				if(mIn.getMessageType() == Message.Type.EXIT) {
+					exit = true;
+				} else if (mIn.getMessageType() == Message.Type.GAME_INFORMATION) {
+					System.out.println(mIn.getDescription());
+				} else if (mIn.getMessageType() == Message.Type.COORDINATE_REQUEST) {
+					mOut = new Message(Message.Type.SEND_COORDINATE,Herramientas.pedirString("Introduce la coordenada"));
+					player.getOos().writeObject(mOut);
+				}
 				
 			}
 			// To do
@@ -220,7 +232,10 @@ public class ChessClient {
 		
 		for(Integer id : listado.keySet()) {
 			
-			System.out.println((id) + " " + listado.get(id)[0]);
+			if(listado.get(id)[0] == null)
+				System.out.println(id + " " + listado.get(id)[1]);
+			else
+				System.out.println(id + " " + listado.get(id)[0]);
 			
 		}
 		// To do

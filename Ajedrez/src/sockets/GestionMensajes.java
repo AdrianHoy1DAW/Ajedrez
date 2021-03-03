@@ -106,6 +106,7 @@ public class GestionMensajes {
 				game.setWhite(player);
 				mOut = new Message(Message.Type.ADDED_TO_GAME, "Added to the game " + m.getGameId());
 				mOut.setGameId(m.getGameId());
+				
 			} else {
 				mOut = new Message(Message.Type.NOT_ADDED,
 						"Not added to the game " + m.getGameId() + " , the game has already started.");
