@@ -141,8 +141,8 @@ public class ChessClient {
 				} else if (mIn.getMessageType() == Message.Type.GAME_INFORMATION) {
 					System.out.println(mIn.getDescription());
 				} else if (mIn.getMessageType() == Message.Type.COORDINATE_REQUEST) {
-					mOut = new Message(Message.Type.SEND_COORDINATE,Herramientas.pedirString("Introduce la coordenada"));
-					player.getOos().writeObject(mOut);
+					c = Herramientas.obtenerCoordenada();
+					player.getOos().writeObject(c);
 				}
 				
 			}

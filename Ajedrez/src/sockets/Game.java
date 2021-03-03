@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 import chess.ChessServer;
 import entrada.Coordenada;
+import entrada.Herramientas;
 import modelo.Color;
 import modelo.Pieza;
 import modelo.Player;
@@ -87,7 +88,7 @@ public class Game extends Thread implements Serializable {
 
 			turn = Color.values()[(turn.ordinal() + 1) % Color.values().length];
 
-		} while (board.contieneReyNegro()  && board.contieneReyBlanco()  && black.getSocket().isConnected()
+		} while (board.contieneReyNegro() == false  && board.contieneReyBlanco() == false  && black.getSocket().isConnected()
 				&& white.getSocket().isConnected());
 
 		if (board.contieneReyBlanco())
@@ -108,22 +109,64 @@ public class Game extends Thread implements Serializable {
 
 	private void movePiece(Player player) {
 
-		Coordenada c;
+		Coordenada c = null;
+		Coordenada d = null;
 		Pieza p;
+		boolean sePuedeMover = false;
 
 		sendInformation("Move -> " + player.getColor() + "  (" + player.getName() + ").");
 		sendInformation((player.getColor() == Color.WHITE) ? black : white,"Wait for the other player to finish moving...");
 
 		boolean moved = false;
 
-		do {
+		
 			sendInformation(player,board.Print(player.getColor()));
-			c = requestCoordinate(player);
-			
-			// To do 
-			// Game mechanics
+			while(sePuedeMover == false) {
+				System.out.println(board.Print(player.getColor()));
+				sendInformation(player,"Qué ficha quieres mover");
+				c = requestCoordinate(player);
+				if(board.getCelda(c).contienePieza() == true) {
+					if(board.getCelda(c).getPieza().getColor() == player.getColor()) {
+						if(board.getCelda(c).getPieza().canMove() == true) {
+							sePuedeMover = true;
+						} else {
+							Herramientas.clear();
+							sendInformation(player,"Esa ficha no se puede mover");
+							
+						}
+					} else {
+						Herramientas.clear();
+						sendInformation(player,"Esa ficha no es de tu color");
+						
+					} 
+				}	else {
+					Herramientas.clear();
+					sendInformation(player,"En esa posición no hay una ficha");
+					
+				
+					} 
 
-		} while (!moved);
+			}
+			
+			
+			do {
+						sendInformation(player,"A donde la quieres mover");
+						
+						d = requestCoordinate(player);
+						if(board.getCelda(c).getPieza().cantMoveTo(d)) {
+							board.move(c, d);
+							moved = true;
+						} else {
+							Herramientas.clear();
+							sendInformation(player, "No se puede mover ahí");
+							
+						}
+				
+						
+				} while (!moved);
+			
+		
+		
 
 	}
 
@@ -138,9 +181,9 @@ public class Game extends Thread implements Serializable {
 			// Send to the player the request coordinate message and wait for the response.
 			// Check if the answer is a correct message, and return the coordinate recived
 			player.getOos().writeObject(mOut);
-			mIn = (Message)player.getOis().readObject();
+			c = (Coordenada)player.getOis().readObject();
 			
-			System.out.println(mIn.getDescription());
+			
 			
 		
 

@@ -1,6 +1,8 @@
 package entrada;
 
-public class Coordenada {
+import java.io.Serializable;
+
+public class Coordenada implements Serializable {
 
 	private char ejeX;
 	private int ejeY;

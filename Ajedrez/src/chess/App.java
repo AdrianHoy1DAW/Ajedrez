@@ -12,12 +12,10 @@ public class App {
 		Scanner sc = new Scanner(System.in);
 
 		
-		Player j1 = new Player("Hoyos");
-		Player j2 = new Player("Martín");
-		ControladorJuego cj = new ControladorJuego(j1, j2);
+
+
 		
 		
-		cj.go();
 	
 		
 		

@@ -24,6 +24,9 @@ public class Herramientas {
 		
 	}
 	
+
+	
+	
 	private static String obtenerCadena() {
 		String coordenada = pedirString("Introduce una coordenada primero poniendo la letra y después el número ");
 		
